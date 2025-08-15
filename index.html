@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Zeppelin Power Systems</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Career Page Content -->
+    <div class="career-page">
+        <header class="page-header">
+            <div class="header-content">
+                <div class="company-logo">
+                    <div class="zeppelin-icon">
+                        <img src="data/logo.jpg.svg" alt="Zeppelin Icon" class="zeppelin-icon-img" style="margin-left: -50%; margin-right: 20%;">
+                    </div>
+                    <h1>Zeppelin Power Systems</h1>
+                <!-- </div>
+                <p class="tagline">SHAPE THE FUTURE AT ZEPPELIN POWER SYSTEMS</p>
+            </div> -->
+        </header>
+
+        <main class="career-content">
+            <section class="hero-section">
+                <h1 class="main-title">SHAPE THE FUTURE AT ZEPPELIN POWER SYSTEMS</h1>
+                <div class="cta-container">
+                    <button class="explore-btn">
+                        Explore Open Positions
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+                <div class="hero-description">
+                    <p>At Zeppelin Power Systems, you can expect a career that is as diverse as our solutions. As a leading provider of drive and energy systems, we combine technological innovation with sustainable progress and rely on a team that masters challenges with passion and creativity.</p>
+                    <p>We are looking for committed talents who want to shape the future of technology with curiosity, fresh ideas and enthusiasm. With tailor-made development programs and exciting projects, we offer you the opportunity to actively shape your career.</p>
+                </div>
+            </section>
+
+            <section class="career-highlight">
+                <h2 class="section-title">ZEPPELIN POWER SYSTEMS CAREER</h2>
+                <h3 class="talent-headline">TALENT WANTED – JOIN OUR TEAM NOW</h3>
+                <div class="positions-cta">
+                    <button class="view-positions-btn">View all open positions</button>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🚀 Innovation</h3>
+                        <p>Work on cutting-edge airship technology and renewable energy systems</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🌱 Growth</h3>
+                        <p>Advance your career with comprehensive training and development programs</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🌍 Impact</h3>
+                        <p>Make a difference in sustainable transportation and clean energy</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🤝 Culture</h3>
+                        <p>Join a diverse, inclusive team committed to excellence and collaboration</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Chat Button (Bottom Right) -->
+    <div class="chat-button" id="chatButton">
+        <div class="chat-icon"><img src="data//578d5383-ded9-4eb3-a642-bd980ce2a0ae.jpeg" alt="Chat Icon" class="chat-icon-img"></div>
+        <span class="chat-text">Chat with Zeppy</span>
+    </div>
+
+    <!-- Chat Widget Popup -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="header-info">
+                <div class="bot-avatar">
+                    <!-- To use your own Zeppy image, replace the src with your image data URI -->
+                    <!-- Example: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD... -->
+                    <img src="data/578d5383-ded9-4eb3-a642-bd980ce2a0ae.jpeg" 
+                          alt="Zeppy" 
+                          class="zeppy-image" 
+                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="zeppy-fallback">Z</div>
+                </div>
+                <div class="header-text">
+                    <h3>Zeppy</h3>
+                    <p>Your HR Assistant</p>
+                </div>
+            </div>
+            <button class="close-chat" id="closeChat">✕</button>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    <p>Hi there! I'm Zeppy <img src="data/578d5383-ded9-4eb3-a642-bd980ce2a0ae.jpeg" alt="Zeppy" class="zeppy-image">, your friendly HR assistant at Zeppelin Power Systems! </p>
+                    <p>I'm here to help you explore exciting career opportunities and answer any questions about our company. What would you like to know?</p>
+                    <div class="quick-options">
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application Process</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Browse Jobs</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company Info</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('benefits')">Benefits & Culture</button>
+                    </div>
+                </div>
+                <div class="message-time" id="initialTime"></div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <div class="input-wrapper">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Ask about jobs, benefits, company info..."
+                    maxlength="500"
+                >
+                <button id="sendButton" type="button">
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget Overlay -->
+    <div class="chat-overlay" id="chatOverlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

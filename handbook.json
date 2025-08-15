@@ -1,0 +1,53 @@
+{
+  "company": {
+    "name": "Zeppelin Power Systems",
+    "founded": "2018",
+    "headquarters": "Hamburg, Germany",
+    "description": "We are part of the Zeppelin Group and specialize in drive systems and energy systems - with a focus on sustainability and innovation. We offer individual, highly efficient system solutions and services in the fields of industrial and marine applications, the oil and gas industry, rail vehicles, power and heat generation. Digital solutions for all segments complete the portfolio.",
+    "mission": "As a foundation company, we act in a future-oriented, social and sustainable manner. Team spirit, diversity and safety are at the heart of what we do.",
+    "vision": "Grow with Zeppelin: We offer extensive training opportunities and long-term career prospects in drive and energy systems.",
+    "values": [
+      "Future-oriented and sustainable business practices",
+      "Team spirit and collaboration", 
+      "Diversity and inclusion (Z COLOURFUL)",
+      "Health and wellness (Z FIT)",
+      "Safety first approach",
+      "Innovation in drive and energy systems",
+      "Long-term employment security"
+    ],
+    "culture": {
+      "work_environment": "We offer mobile working, flexible models and advice on all aspects of family and career. Different working time models allow many employees to work flexitime without shift work.",
+      "team_spirit": "As a foundation company, team spirit, diversity and safety are at the heart of what we do. Regular impulse series and networks strengthen our collaborative culture.",
+      "growth_opportunities": "Grow with Zeppelin: We offer extensive training opportunities - individual and practical. Internal trainings, impulse series and learning formats are tailored to your role and interests.",
+      "work_life_balance": "We support work-life balance through mobile working, flexible models, and comprehensive advice on family and career compatibility. Z FIT promotes health with team events and company bikes."
+    },
+    "locations": [
+      {
+        "city": "Hamburg",
+        "type": "Headquarters",
+        "focus": "R&D, Administration, Marketing"
+      },
+      {
+        "city": "Berlin", 
+        "type": "Engineering Center",
+        "focus": "Electrical Systems, Software Development"
+      },
+      {
+        "city": "Bremen",
+        "type": "Manufacturing Facility", 
+        "focus": "Production, Assembly, Quality Control"
+      },
+      {
+        "city": "Munich",
+        "type": "Regional Office",
+        "focus": "Sales, Customer Support, HR"
+      },
+      {
+        "city": "Stuttgart",
+        "type": "Test Center",
+        "focus": "Flight Testing, Validation, Certification"
+      }
+    ],
+    "keywords": ["company", "about", "zeppelin", "power", "systems", "mission", "vision", "culture", "values", "history", "locations"]
+  }
+}
