@@ -75,6 +75,10 @@ class ZeppelinChatbot {
             context: {}
         };
         
+        // Job pagination state
+        this.currentJobSet = [];
+        this.currentJobPage = 0;
+        
         this.initializeEventListeners();
         this.loadData();
         this.setInitialTime();
@@ -626,25 +630,35 @@ class ZeppelinChatbot {
         Object.keys(synonyms).forEach(category => {
             Object.keys(synonyms[category]).forEach(key => {
                 synonyms[category][key].forEach(synonym => {
-                    if (query.includes(synonym)) {
+                    if (query.toLowerCase().includes(synonym.toLowerCase())) {
                         switch(category) {
                             case 'jobTitles':
-                                criteria.jobTitles.push(key);
+                                if (!criteria.jobTitles.includes(key)) {
+                                    criteria.jobTitles.push(key);
+                                }
                                 break;
                             case 'skills':
-                                criteria.skills.push(key);
+                                if (!criteria.skills.includes(key)) {
+                                    criteria.skills.push(key);
+                                }
                                 break;
                             case 'locations':
-                                criteria.locations.push(key);
+                                if (!criteria.locations.includes(key)) {
+                                    criteria.locations.push(key);
+                                }
                                 break;
                             case 'experience':
                                 criteria.experience = key;
                                 break;
                             case 'departments':
-                                criteria.departments.push(key);
+                                if (!criteria.departments.includes(key)) {
+                                    criteria.departments.push(key);
+                                }
                                 break;
                             case 'jobTypes':
-                                criteria.jobTypes.push(key);
+                                if (!criteria.jobTypes.includes(key)) {
+                                    criteria.jobTypes.push(key);
+                                }
                                 break;
                         }
                     }
@@ -675,6 +689,16 @@ class ZeppelinChatbot {
             filteredJobs = this.jobs.filter(job => this.fuzzyMatchJob(job, criteria));
         }
         
+        // Additional fallback for location-based searches
+        if (filteredJobs.length === 0 && criteria.locations.length > 0) {
+            filteredJobs = this.jobs.filter(job => 
+                criteria.locations.some(location => 
+                    job.location.toLowerCase().includes(location.toLowerCase()) ||
+                    location.toLowerCase().includes(job.location.toLowerCase())
+                )
+            );
+        }
+        
         // Rank by relevance
         const rankedJobs = filteredJobs.map(job => ({
             ...job,
@@ -685,6 +709,19 @@ class ZeppelinChatbot {
         rankedJobs.sort((a, b) => b.relevanceScore - a.relevanceScore);
         
         return rankedJobs;
+    }
+
+    // Debug function - can be called from console
+    testLocationSearch(query) {
+        console.log('=== Testing Location Search ===');
+        console.log('Query:', query);
+        const corrected = this.correctSpelling(query);
+        console.log('Corrected:', corrected);
+        const criteria = this.extractSearchCriteria(corrected);
+        console.log('Criteria:', criteria);
+        const results = this.searchAndRankJobs(criteria);
+        console.log('Results:', results.length, results);
+        return results;
     }
 
     matchesJobCriteria(job, criteria) {
@@ -768,7 +805,13 @@ class ZeppelinChatbot {
             ...criteria.keywords
         ];
 
-        return allTerms.some(term => jobText.includes(term.toLowerCase()));
+        // Also check for direct location matching as a fallback
+        const hasLocationMatch = criteria.locations.length > 0 && 
+            criteria.locations.some(location => 
+                job.location.toLowerCase().includes(location.toLowerCase())
+            );
+
+        return hasLocationMatch || allTerms.some(term => jobText.includes(term.toLowerCase()));
     }
 
     calculateRelevanceScore(job, criteria) {
@@ -1057,6 +1100,12 @@ class ZeppelinChatbot {
             return;
         }
         
+        // Reset pagination for new job set
+        if (!showAll) {
+            this.currentJobSet = jobs;
+            this.currentJobPage = 0;
+        }
+        
         if (jobs.length === 1) {
             const jobCard = isSearchResult ? this.formatSearchResultCard(jobs[0]) : this.formatJobCard(jobs[0]);
             this.addBotMessage(`
@@ -1072,10 +1121,11 @@ class ZeppelinChatbot {
             
             let viewMoreButton = '';
             if (!showAll && jobs.length > 4) {
+                const remainingJobs = jobs.length - 4;
                 viewMoreButton = `
                     <div class="view-more-container">
-                        <button class="view-more-btn" onclick="chatbot.showAllJobs(${JSON.stringify(jobs.map(j => j.id)).replace(/"/g, '&quot;')})">
-                            View ${jobs.length - 4} More Jobs
+                        <button class="view-more-btn" onclick="window.chatbot.showMoreJobs()">
+                            View ${Math.min(4, remainingJobs)} More Jobs (${remainingJobs} remaining)
                         </button>
                     </div>
                 `;
@@ -1238,10 +1288,10 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>You want to know more about the application - what exactly is it about?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.askSpecific('What do I need to submit?')">What do I need to submit?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('How does the process work?')">How does the process work?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Can I send an unsolicited application?')">Can I send an unsolicited application?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Can I change my application?')">Can I change my application?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What do I need to submit?')">What do I need to submit?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('How does the process work?')">How does the process work?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Can I send an unsolicited application?')">Can I send an unsolicited application?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Can I change my application?')">Can I change my application?</button>
                     </div>
                 `);
                 break;
@@ -1250,10 +1300,10 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>Are you interested in a specific position?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.askSpecific('Where can I find the requirements?')">Where can I find the requirements?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('I don\\'t meet all requirements - should I apply anyway?')">I don't meet all requirements - should I apply anyway?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Is the position suitable for young professionals?')">Is the position suitable for young professionals?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">Show me available jobs</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Where can I find the requirements?')">Where can I find the requirements?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('I don\\'t meet all requirements - should I apply anyway?')">I don't meet all requirements - should I apply anyway?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Is the position suitable for young professionals?')">Is the position suitable for young professionals?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('show me available jobs')">Show me available jobs</button>
                     </div>
                 `);
                 break;
@@ -1262,10 +1312,10 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>What would you like to know about Zeppelin Power Systems?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.askSpecific('What exactly do you do?')">What exactly do you do?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('What are the working hours like?')">What are the working hours like?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Do you work from home?')">Do you work from home?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('company locations')">Office locations</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What exactly do you do?')">What exactly do you do?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What are the working hours like?')">What are the working hours like?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Do you work from home?')">Do you work from home?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('company locations')">Office locations</button>
                     </div>
                 `);
                 break;
@@ -1274,9 +1324,9 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>You want to develop yourself further - here are our offers:</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.askSpecific('What further training opportunities are there?')">What further training opportunities are there?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Are there internal training courses?')">Are there internal training courses?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('How safe is my job?')">How safe is my job?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What further training opportunities are there?')">What further training opportunities are there?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Are there internal training courses?')">Are there internal training courses?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('How safe is my job?')">How safe is my job?</button>
                     </div>
                 `);
                 break;
@@ -1285,11 +1335,11 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>Our benefits and values - what interests you?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.askSpecific('How many vacation days do I have?')">How many vacation days do I have?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Is there a job ticket?')">Is there a job ticket?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('What is Z FIT?')">What is Z FIT?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('What does Z COLOURFUL mean?')">What does Z COLOURFUL mean?</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('What do you do for sustainability?')">What do you do for sustainability?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('How many vacation days do I have?')">How many vacation days do I have?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('Is there a job ticket?')">Is there a job ticket?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What is Z FIT?')">What is Z FIT?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What does Z COLOURFUL mean?')">What does Z COLOURFUL mean?</button>
+                        <button class="option-btn" onclick="window.chatbot.askSpecific('What do you do for sustainability?')">What do you do for sustainability?</button>
                     </div>
                 `);
                 break;
@@ -1306,7 +1356,7 @@ class ZeppelinChatbot {
 
     askSpecific(question) {
         // Handle special cases
-        if (question === 'show me all available jobs') {
+        if (question === 'show me all available jobs' || question === 'show me available jobs') {
             this.addUserMessage('Show me all available jobs');
             this.showTypingIndicator();
             
@@ -1646,9 +1696,12 @@ class ZeppelinChatbot {
             locations: {
                 'berlin': ['berlin', 'berlín'],
                 'hamburg': ['hamburg', 'hambourg'],
-                'bremen': ['bremen', 'brême'],
-                'munich': ['munich', 'münchen', 'muenchen', 'múnich'],
-                'stuttgart': ['stuttgart', 'stutgart']
+                'munich': ['munich', 'münchen', 'muenchen'],
+                'stuttgart': ['stuttgart'],
+                'bremen': ['bremen'],
+                'frankfurt': ['frankfurt'],
+                'cologne': ['cologne', 'köln', 'koeln'],
+                'düsseldorf': ['düsseldorf', 'dusseldorf', 'duesseldorf']
             },
             jobTypes: {
                 'engineer': ['engineer', 'engineering', 'technical', 'dev', 'developer'],
@@ -1700,6 +1753,38 @@ class ZeppelinChatbot {
             zeppyImage.style.display = 'block';
             zeppyImage.nextElementSibling.style.display = 'none';
         }
+    }
+
+    showMoreJobs() {
+        if (this.currentJobSet.length === 0) return;
+        
+        this.currentJobPage++;
+        const startIndex = this.currentJobPage * 4;
+        const endIndex = startIndex + 4;
+        const nextJobs = this.currentJobSet.slice(startIndex, endIndex);
+        
+        if (nextJobs.length === 0) return;
+        
+        const jobCards = nextJobs.map(job => this.formatJobCard(job)).join('');
+        const remainingJobs = this.currentJobSet.length - (this.currentJobPage + 1) * 4;
+        
+        let viewMoreButton = '';
+        if (remainingJobs > 0) {
+            viewMoreButton = `
+                <div class="view-more-container">
+                    <button class="view-more-btn" onclick="window.chatbot.showMoreJobs()">
+                        View ${Math.min(4, remainingJobs)} More Jobs (${remainingJobs} remaining)
+                    </button>
+                </div>
+            `;
+        }
+        
+        this.addBotMessage(`
+            <p>Here are the next ${nextJobs.length} positions:</p>
+            ${jobCards}
+            ${viewMoreButton}
+            ${remainingJobs === 0 ? '<p>That\'s all the available positions! 🎉 Any of these look interesting to you?</p>' : ''}
+        `);
     }
 
     showAllJobs(jobIds) {
