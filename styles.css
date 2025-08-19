@@ -47,6 +47,12 @@ body {
     animation: pulse 2s infinite;
 }
 
+.zeppelin-icon-img {
+    width: 50px;
+    height: auto;
+    max-width: 100%;
+}
+
 .company-logo h1 {
     font-size: 2.5rem;
     font-weight: 700;
@@ -915,6 +921,46 @@ body {
 
 /* Global Mobile Optimizations */
 @media (max-width: 768px) {
+    /* Header Mobile Optimizations */
+    .page-header {
+        padding: 1rem 0;
+    }
+    
+    .header-content {
+        padding: 0 1rem;
+    }
+    
+    .company-logo {
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .company-logo h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        text-align: center;
+    }
+    
+    .zeppelin-icon {
+        font-size: 1.8rem;
+    }
+    
+    .zeppelin-icon-img {
+        margin-left: 0 !important;
+        margin-right: 10px !important;
+        max-width: 40px;
+        height: auto;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.3;
+    }
+    
     /* Ensure proper touch targets */
     button, .option-btn, .view-details-btn, .apply-btn {
         min-height: 44px !important;
@@ -1009,6 +1055,46 @@ body {
 }
 
 @media (max-width: 480px) {
+    /* Header Extra Small Mobile Optimizations */
+    .page-header {
+        padding: 0.8rem 0;
+    }
+    
+    .header-content {
+        padding: 0 0.5rem;
+    }
+    
+    .company-logo {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    
+    .company-logo h1 {
+        font-size: 1.4rem;
+        line-height: 1.1;
+        margin: 0;
+    }
+    
+    .zeppelin-icon {
+        font-size: 1.5rem;
+    }
+    
+    .zeppelin-icon-img {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 35px;
+        height: auto;
+    }
+    
+    .tagline {
+        font-size: 0.9rem;
+        line-height: 1.2;
+        margin-top: 0.3rem;
+    }
+    
+    /* Original 480px styles */
     .job-card.search-result {
         padding: 15px;
         margin: 10px 0;

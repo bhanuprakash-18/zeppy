@@ -252,15 +252,20 @@ class ZeppelinChatbot {
             this.addBotMessage(`
                 <p>You can contact our recruiting team in several ways:</p>
                 <ul>
-                    <li><strong>Email:</strong> careers@zeppelin-power.com</li>
-                    <li><strong>Phone:</strong> +49 40 123-4567 (Hamburg HQ)</li>
+                    <li><strong>Email:</strong> careers@jobs.com</li>
+                    <li><strong>Phone:</strong> +49 00 123-4567 (Hamburg HQ)</li>
                     <li><strong>Application Portal:</strong> Visit our website's career section</li>
                     <li><strong>LinkedIn:</strong> Follow us @ZeppelinPowerSystems</li>
                 </ul>
                 <p>Our recruiting team is available Monday-Friday, 9:00 AM - 5:00 PM CET.</p>
-                <p>Would you like me to help you with anything else, or would you prefer to apply for a position directly?</p>
+                <p>Would you like to apply for a position, or do you have more questions?</p>
+                <div class="quick-options">
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Apply for positions</button>
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application questions</button>
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company information</button>
+                    <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+                </div>
             `);
-            this.setExpectingFollowUp(true);
             return;
         }
         
@@ -285,8 +290,7 @@ class ZeppelinChatbot {
             if (companyInfo) {
                 this.setConversationState('company', 'company_info');
                 this.addBotMessage(companyInfo);
-                this.addBotMessage(`<p>Would you like to know more about our company culture, or are you interested in exploring job opportunities?</p>`);
-                this.setExpectingFollowUp(true);
+                this.addCompanyInfoOptions();
                 return;
             }
         }
@@ -304,8 +308,7 @@ class ZeppelinChatbot {
         if (companyInfo) {
             this.setConversationState('company', 'company_info');
             this.addBotMessage(companyInfo);
-            this.addBotMessage(`<p>Would you like to know more about our company culture, or are you interested in exploring job opportunities?</p>`);
-            this.setExpectingFollowUp(true);
+            this.addCompanyInfoOptions();
             return;
         }
 
@@ -1176,6 +1179,13 @@ class ZeppelinChatbot {
                 <p>Great news! 🎉 I found 1 perfect position for you:</p>
                 ${jobCard}
                 <p>This looks like an exciting opportunity! Would you like me to tell you more about the application process or show you similar positions? I'm here to help! ✨</p>
+                <p>What would you like to do next?</p>
+                <div class="quick-options">
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Learn about applying</button>
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Search more jobs</button>
+                    <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Contact recruiting</button>
+                    <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+                </div>
             `);
         } else {
             const displayJobs = showAll ? jobs : jobs.slice(0, 4);
@@ -1200,9 +1210,15 @@ class ZeppelinChatbot {
                 ${jobCards}
                 ${viewMoreButton}
                 <p>Wow, so many great opportunities! 😊 Do any of these catch your eye? I'd love to help you learn more about them or guide you through the application process!</p>
+                <p>What would you like to do next?</p>
+                <div class="quick-options">
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Learn about applying</button>
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Search more jobs</button>
+                    <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Contact recruiting</button>
+                    <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+                </div>
             `);
         }
-        this.setExpectingFollowUp(true);
     }
 
     respondWithFAQ(faq) {
@@ -1536,6 +1552,42 @@ class ZeppelinChatbot {
         `);
     }
 
+    addCompanyInfoOptions() {
+        this.addBotMessage(`
+            <p>Would you like to know more about our company, or are you interested in exploring opportunities?</p>
+            <div class="quick-options">
+                <button class="option-btn" onclick="chatbot.handleQuickOption('company')">More company info</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">See available jobs</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('benefits')">Benefits & culture</button>
+                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+            </div>
+        `);
+    }
+
+    addContactOptions() {
+        this.addBotMessage(`
+            <p>Would you like to apply for a position, or do you have more questions?</p>
+            <div class="quick-options">
+                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Apply for positions</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application questions</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company information</button>
+                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+            </div>
+        `);
+    }
+
+    addJobSearchOptions() {
+        this.addBotMessage(`
+            <p>What would you like to do next?</p>
+            <div class="quick-options">
+                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Learn about applying</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Search more jobs</button>
+                <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Contact recruiting</button>
+                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+            </div>
+        `);
+    }
+
     resetToMainMenu() {
         this.addBotMessage(`
             <p>Hello and welcome back! What are you interested in right now?</p>
@@ -1695,6 +1747,13 @@ class ZeppelinChatbot {
             <p>Great! You're interested in applying for <strong>${jobTitle}</strong>.</p>
             <p>You will now be redirected to our application portal where you can submit your application.</p>
             <p>Do you have any other questions about the application process or our company?</p>
+            <p>What would you like to do next?</p>
+            <div class="quick-options">
+                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Learn about applying</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Search more jobs</button>
+                <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Contact recruiting</button>
+                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+            </div>
         `);
     }
 
