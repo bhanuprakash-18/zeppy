@@ -1233,18 +1233,38 @@ class ZeppelinChatbot {
     scrollToNewMessage(messageElement) {
         // Add a small delay to ensure the message is fully rendered
         setTimeout(() => {
-            // If we have a reference to the last user message, scroll to show it
-            if (this.lastUserMessage) {
-                const userMessageTop = this.lastUserMessage.offsetTop;
-                // Position the user message below the header with more padding
-                // Account for header height (~85px) plus additional spacing
-                this.chatMessages.scrollTop = Math.max(0, userMessageTop - 100);
-            } else {
-                // Fallback: scroll to show the beginning of the bot message
-                const messageTop = messageElement.offsetTop;
-                this.chatMessages.scrollTop = Math.max(0, messageTop - 100);
+            if (messageElement) {
+                // Scroll to the new message smoothly
+                messageElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start', // Align to the top of the message
+                    inline: 'nearest'
+                });
+                
+                // Alternative: Use container scroll for more control
+                // const messageTop = messageElement.offsetTop;
+                // const containerHeight = this.chatMessages.clientHeight;
+                // const targetScroll = messageTop - 50; // 50px padding from top
+                // this.chatMessages.scrollTo({
+                //     top: targetScroll,
+                //     behavior: 'smooth'
+                // });
             }
-        }, 100);
+        }, 100); // Small delay to ensure content is rendered
+    }
+
+    // Enhanced scroll function for specific content within messages
+    scrollToElement(elementId) {
+        setTimeout(() => {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            }
+        }, 150);
     }
 
     handleQuickOption(option) {
@@ -1772,13 +1792,29 @@ class ZeppelinChatbot {
                 </div>
             `;
         }
-        
+
+        // Add a unique ID to the new jobs message for precise scrolling
+        const messageId = `new-jobs-${Date.now()}`;
         this.addBotMessage(`
-            <p>Here are the next ${nextJobs.length} positions:</p>
-            ${jobCards}
-            ${viewMoreButton}
-            ${remainingJobs === 0 ? '<p>That\'s all the available positions! 🎉 Any of these look interesting to you?</p>' : ''}
+            <div id="${messageId}">
+                <p>Here are the next ${nextJobs.length} positions:</p>
+                ${jobCards}
+                ${viewMoreButton}
+                ${remainingJobs === 0 ? '<p>That\'s all the available positions! 🎉 Any of these look interesting to you?</p>' : ''}
+            </div>
         `);
+        
+        // Scroll specifically to the new jobs section
+        setTimeout(() => {
+            const newJobsElement = document.getElementById(messageId);
+            if (newJobsElement) {
+                newJobsElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            }
+        }, 150);
     }
 
     showAllJobs(jobIds) {
