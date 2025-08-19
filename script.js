@@ -1145,7 +1145,6 @@ class ZeppelinChatbot {
         this.addBotMessage(`
             <p><strong>Q: ${faq.question}</strong></p>
             <p>${faq.answer}</p>
-            <p>Does this answer your question? Would you like to know more about this topic or explore something else?</p>
             <br>
             <p>I hope I was able to help you! Would you like to:</p>
             <div class="quick-options">
@@ -1615,13 +1614,7 @@ class ZeppelinChatbot {
         this.closePopup();
         this.addBotMessage(`
             <p>Great! You're interested in applying for <strong>${jobTitle}</strong>.</p>
-            <p>In a real scenario, this would redirect you to our application portal. For this demo:</p>
-            <ul>
-                <li>📧 Send your CV to: <strong>careers@zeppelin-power.com</strong></li>
-                <li>📋 Subject line: "Application for ${jobTitle}"</li>
-                <li>💡 Include a brief cover letter explaining your interest</li>
-            </ul>
-            <p>Our recruiting team will review your application and respond within 7 days!</p>
+            <p>You will now be redirected to our application portal where you can submit your application.</p>
             <p>Do you have any other questions about the application process or our company?</p>
         `);
     }
