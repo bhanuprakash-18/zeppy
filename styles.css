@@ -273,7 +273,7 @@ body {
 }
 
 .bot-avatar {
-    background: #ffd700;
+    background: transparent; /* Remove yellow background */
     border-radius: 50%;
     width: 45px;
     height: 45px;
@@ -282,20 +282,20 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    border: 2px solid #ffffff;
+    border: 2px solid #e0e0e0; /* Subtle gray border instead of white */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .zeppy-image {
-    width: 24px;
-    height: 24px;
+    width: 41px; /* Make image fill the avatar container (45px - 2px border each side) */
+    height: 41px;
     object-fit: cover;
     border-radius: 50%;
     display: inline-block;
     vertical-align: middle;
-    margin: 0 4px;
-    border: 2px solid #ffd700;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    border: none; /* Remove yellow border */
+    box-shadow: none; /* Remove shadow to keep it clean */
 }
 
 .zeppy-fallback {
@@ -303,6 +303,18 @@ body {
     font-weight: bold;
     color: #1a1a2e;
     display: none;
+}
+
+/* Specific styles for inline zeppy images in messages */
+.message-content .zeppy-image {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 2px;
+    vertical-align: middle;
+    border: none;
+    box-shadow: none;
 }
 
 .header-text h3 {
