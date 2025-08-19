@@ -469,8 +469,8 @@ class ZeppelinChatbot {
         // Step 3: Filter and rank jobs
         const rankedJobs = this.searchAndRankJobs(searchCriteria);
         
-        // Step 4: Return maximum 4 results
-        return rankedJobs.slice(0, 4);
+        // Step 4: Return all matching jobs (pagination handled in display)
+        return rankedJobs;
     }
 
     correctSpelling(query) {
@@ -1105,7 +1105,7 @@ class ZeppelinChatbot {
             this.currentJobSet = jobs;
             this.currentJobPage = 0;
         }
-        
+
         if (jobs.length === 1) {
             const jobCard = isSearchResult ? this.formatSearchResultCard(jobs[0]) : this.formatJobCard(jobs[0]);
             this.addBotMessage(`
@@ -1474,6 +1474,7 @@ class ZeppelinChatbot {
 
     showJobDetails(jobId) {
         console.log('showJobDetails called with jobId:', jobId);
+        console.log('Screen width:', window.innerWidth);
         const job = this.jobs.find(j => j.id === jobId);
         console.log('Found job:', job);
         if (!job) {
@@ -1484,7 +1485,7 @@ class ZeppelinChatbot {
         const requirements = job.requirements.map(req => `<li>${req}</li>`).join('');
         
         const popup = `
-            <div class="job-popup-overlay" id="jobPopup" onclick="window.chatbot.closePopup()">
+            <div class="job-popup-overlay" id="jobPopup">
                 <div class="job-popup-content" onclick="event.stopPropagation()">
                     <div class="popup-header">
                         <h2>${job.title}</h2>
@@ -1551,7 +1552,7 @@ class ZeppelinChatbot {
         this.closePopup();
 
         const popup = `
-            <div class="job-popup-overlay" id="applicationPopup" onclick="window.chatbot.closePopup()">
+            <div class="job-popup-overlay" id="applicationPopup">
                 <div class="application-popup-content" onclick="event.stopPropagation()">
                     <div class="popup-header">
                         <h2>Apply for ${job.title}</h2>

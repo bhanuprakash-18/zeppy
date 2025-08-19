@@ -898,6 +898,45 @@ body {
     font-weight: 600;
 }
 
+/* Responsive design for job popup alongside chatbot */
+/* For screens smaller than 800px, stack popup above chatbot */
+@media (max-width: 950px) {
+    .job-popup-content,
+    .application-popup-content {
+        right: 20px !important;
+        left: 20px !important;
+        width: auto !important;
+        bottom: 620px !important; /* Position above chatbot */
+        height: 400px !important;
+        animation: slideInUp 0.3s ease-out !important;
+    }
+    
+    .chat-widget {
+        width: 350px !important;
+        height: 500px !important;
+        right: 20px !important;
+        bottom: 80px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .job-popup-content {
+        right: 20px;
+        left: 20px;
+        width: auto;
+        bottom: 620px; /* Position above chatbot on mobile */
+        height: 400px;
+        animation: slideInUp 0.3s ease-out;
+    }
+    
+    .chat-widget {
+        width: 350px;
+        height: 500px;
+        right: 20px;
+        bottom: 80px;
+    }
+}
+
 /* Responsive design for search result cards */
 @media (max-width: 768px) {
     .job-meta-info {
@@ -944,37 +983,56 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background: transparent; /* Make overlay transparent */
     z-index: 10000;
-    backdrop-filter: blur(5px);
     animation: fadeIn 0.3s ease-out;
+    pointer-events: none; /* Allow clicking through overlay completely */
 }
 
 .job-popup-content {
     background: #ffffff;
     border-radius: 20px;
-    width: 90%;
-    max-width: 800px;
-    max-height: 90vh;
+    width: 500px; /* Increased width for better content display */
+    height: 600px;
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideInUp 0.3s ease-out;
-    position: relative;
+    animation: slideInLeft 0.3s ease-out;
+    position: fixed;
+    bottom: 100px; /* Same bottom position as chatbot */
+    right: 450px; /* Position to the left of chatbot */
+    pointer-events: auto;
+    border: 2px solid #e0e0e0;
+    z-index: 10001;
+}
+
+/* Ensure side-by-side layout on wider screens */
+@media (min-width: 950px) {
+    .job-popup-content,
+    .application-popup-content {
+        left: auto !important;
+        right: 450px !important;
+        width: 500px !important;
+        bottom: 100px !important;
+        height: 600px !important;
+        position: fixed !important;
+        animation: slideInLeft 0.3s ease-out !important;
+    }
 }
 
 .application-popup-content {
     background: #ffffff;
     border-radius: 20px;
-    width: 90%;
-    max-width: 700px;
-    max-height: 90vh;
+    width: 500px; /* Same width as job details popup */
+    height: 600px; /* Same height as job details popup */
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: slideInUp 0.3s ease-out;
-    position: relative;
+    animation: slideInLeft 0.3s ease-out;
+    position: fixed; /* Use fixed positioning like job details */
+    bottom: 100px; /* Same position as chatbot and job details */
+    right: 450px; /* Same position as job details popup */
+    pointer-events: auto;
+    border: 2px solid #e0e0e0;
+    z-index: 10001;
 }
 
 .popup-header {
@@ -1319,5 +1377,37 @@ body {
     .popup-footer {
         padding: 15px;
         border-radius: 0 0 15px 15px;
+    }
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
