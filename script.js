@@ -221,8 +221,14 @@ class ZeppelinChatbot {
                     <li>Benefits and working conditions</li>
                     <li>Training and development opportunities</li>
                 </ul>
+                <br>
+                <p>I hope I was able to help you! Would you like to apply now or find out more?</p>
+                <div class="quick-options">
+                    <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">Apply now</button>
+                    <button class="option-btn" onclick="chatbot.resetToMainMenu()">Ask more questions</button>
+                    <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Get in touch</button>
+                </div>
             `);
-            this.addFollowUpOptions();
             return;
         }
         
@@ -335,14 +341,16 @@ class ZeppelinChatbot {
             return true;
         }
         
-        // Check for very short messages (less than 3 characters or less than 2 words)
-        if (trimmedMessage.length < 3 || trimmedMessage.split(' ').length < 2) {
+        // Check for very short messages (less than 3 characters)
+        if (trimmedMessage.length < 3) {
             return true;
         }
         
-        // Check for other vague patterns
+        // Check for other vague patterns - only truly incomplete questions without objects
         const vaguePatterns = [
-            'what?', 'how?', 'tell me', 'i want to know', 'information'
+            'what?', 'how?', 'tell me', 'i want to know', 'information',
+            'what is', 'what are', 'how do', 'how can', 'tell me about',
+            'what about', 'how about', 'what does'
         ];
         
         return vaguePatterns.some(pattern => trimmedMessage === pattern);
@@ -1093,7 +1101,7 @@ class ZeppelinChatbot {
                 }
             });
             
-            if (score > 0) {
+            if (score > 2) { // Only include matches with meaningful scores
                 matches.push({ faq, score });
             }
         });
