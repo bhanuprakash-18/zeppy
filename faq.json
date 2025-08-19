@@ -2,153 +2,177 @@
   "faqs": [
     {
       "id": 1,
-      "question": "What do I need to consider when applying?",
-      "answer": "To apply to Zeppelin Power Systems, we need your CV. Cover letters and references are not mandatory. Please only apply online via our application portal.",
-      "keywords": ["apply", "applying", "consider", "cv", "documents", "portal", "application"]
+      "question": "What should I consider when applying?",
+      "answer": "To apply to Zeppelin Power Systems, you only need to submit your CV via our online application portal. Cover letters and references are optional but welcome.",
+      "keywords": ["apply", "application", "application portal", "cv", "curriculum vitae", "resume", "cover letter", "references", "documents", "requirements", "submit application", "apply online", "how to apply", "applying", "application process", "consider when applying", "should i consider"]
     },
     {
       "id": 2,
-      "question": "What are the working hours at Zeppelin Power Systems?",
-      "answer": "We offer different working time models - many employees work flexitime. We do not offer shift work.",
-      "keywords": ["hours", "time", "work", "schedule", "flexible", "flexitime", "working time"]
-    },
-    {
-      "id": 2,
-      "question": "What are the working hours at Zeppelin Power Systems?",
-      "answer": "We offer different working time models - many employees work flexitime. We do not offer shift work.",
-      "keywords": ["hours", "time", "work", "schedule", "flexible", "flexitime", "working time"]
+      "question": "What documents are required for an application?",
+      "answer": "The only mandatory document is your CV. A cover letter and references are optional but can strengthen your application.",
+      "keywords": ["documents required", "cv", "resume", "cover letter", "references", "mandatory documents", "application documents"]
     },
     {
       "id": 3,
-      "question": "Is there a home office or mobile working?",
-      "answer": "Yes, we offer mobile and flexible working - depending on the position and in consultation with the team.",
-      "keywords": ["home office", "mobile working", "remote", "flexible", "working from home"]
+      "question": "How does the application process work?",
+      "answer": "After receiving your application, our recruiting team reviews your documents and provides feedback within about 7 days. Depending on the position, further steps may include interviews and assessments.",
+      "keywords": ["application process", "hiring steps", "recruitment", "selection process", "interview", "application steps", "recruitment process"]
     },
     {
       "id": 4,
-      "question": "What does Zeppelin Power Systems do?",
-      "answer": "We are part of the Zeppelin Group and specialize in drive systems and energy systems - with a focus on sustainability and innovation.",
-      "keywords": ["company", "business", "zeppelin group", "drive systems", "energy systems", "sustainability", "innovation"]
+      "question": "How long does it take to receive feedback?",
+      "answer": "You will usually receive initial feedback within 7 days of submitting your application.",
+      "keywords": ["feedback time", "response time", "application status", "timeline", "hearing back", "application feedback", "waiting time"]
     },
     {
       "id": 5,
-      "question": "What is the corporate culture like?",
-      "answer": "As a foundation company, we act in a future-oriented, social and sustainable manner. Team spirit, diversity and safety are at the heart of what we do.",
-      "keywords": ["culture", "corporate culture", "foundation company", "team spirit", "diversity", "safety"]
+      "question": "Can I update my application later?",
+      "answer": "Yes, if you would like to add or change something, please contact our recruiting team or update it in the portal directly.",
+      "keywords": ["update application", "change application", "modify application", "edit application", "recruiting team", "application update"]
     },
     {
       "id": 6,
-      "question": "I don't fulfill all the requirements - should I still apply?",
-      "answer": "Absolutely! Even if you don't meet 100% of the requirements, we look forward to receiving your application. Motivation and personality are just as important to us as experience.",
-      "keywords": ["requirements", "qualifications", "apply anyway", "motivation", "personality", "experience"]
+      "question": "Can I send an unsolicited application?",
+      "answer": "Yes, unsolicited applications are welcome. Please let us know the area or role you are interested in.",
+      "keywords": ["unsolicited application", "open application", "spontaneous application", "general application", "apply without position"]
     },
     {
       "id": 7,
-      "question": "Where can I find the requirements for the position?",
-      "answer": "You can find the requirements directly in the respective job advertisement on our website.",
-      "keywords": ["requirements", "qualifications", "job advertisement", "website", "position"]
+      "question": "I do not fulfill all the requirements – should I still apply?",
+      "answer": "Absolutely. Even if you don't meet every requirement, we encourage you to apply. Motivation and personality matter just as much as experience.",
+      "keywords": ["requirements", "qualifications", "eligibility", "apply anyway", "motivation", "personality", "experience", "skills gap"]
     },
     {
       "id": 8,
-      "question": "Is the position also suitable for career starters?",
-      "answer": "Many of our positions are also suitable for career starters - take a look at the respective advertisement or send us an unsolicited application.",
-      "keywords": ["career starters", "entry level", "beginners", "graduates", "unsolicited application"]
+      "question": "Where can I find the requirements for a position?",
+      "answer": "You can find all requirements directly in the respective job advertisement on our careers page.",
+      "keywords": ["requirements", "qualifications", "job ad", "job description", "position details", "website", "job posting"]
     },
     {
       "id": 9,
-      "question": "What development opportunities do I have?",
-      "answer": "Grow with Zeppelin: We offer you extensive training opportunities - individual and practical.",
-      "keywords": ["development", "training", "opportunities", "growth", "career development"]
+      "question": "Are positions also suitable for career starters?",
+      "answer": "Yes, many positions are suitable for graduates and career starters. Check the job postings or submit an unsolicited application.",
+      "keywords": ["career starters", "entry level", "beginners", "graduates", "junior position", "student jobs", "freshers"]
     },
     {
       "id": 10,
-      "question": "Are there internal training courses?",
-      "answer": "Yes, we offer internal trainings, impulse series and learning formats - tailored to your role and interests.",
-      "keywords": ["internal training", "courses", "impulse series", "learning", "development"]
+      "question": "Do you offer internships or student positions?",
+      "answer": "Yes, we offer internships, student assistant roles, and thesis opportunities in various departments. Check our career portal for current offers.",
+      "keywords": ["internship", "student job", "thesis", "student assistant", "working student", "intern", "graduate internship"]
     },
     {
       "id": 11,
-      "question": "How many vacation days do I have?",
-      "answer": "With us, you get 30 days' vacation per year - plus special leave on certain occasions.",
-      "keywords": ["vacation", "holiday", "days off", "annual leave", "30 days", "special leave"]
+      "question": "What are the working hours at Zeppelin Power Systems?",
+      "answer": "We offer flexible working time models. Full-time means 40 hours per week, with many employees working flexitime. We do not operate with shift work.",
+      "keywords": ["working hours", "work time", "schedule", "flexitime", "working model", "office hours", "time schedule", "shift work", "work timing", "hours", "40 hours", "full-time", "part-time", "flexible hours"]
     },
     {
       "id": 12,
-      "question": "Is there a job ticket?",
-      "answer": "We do not currently offer a job ticket - but we do offer many other attractive social benefits.",
-      "keywords": ["job ticket", "transport", "public transport", "commuting", "social benefits"]
+      "question": "Is home office or mobile working possible?",
+      "answer": "Yes, mobile and flexible working options are available depending on the role and in agreement with the team.",
+      "keywords": ["home office", "remote work", "mobile working", "work from home", "flexible work", "telecommute", "hybrid work", "homeworking"]
     },
     {
       "id": 13,
-      "question": "What additional benefits do you offer?",
-      "answer": "You will receive capital-forming benefits, a company pension scheme, a share in the company's profits and many other benefits.",
-      "keywords": ["benefits", "capital-forming", "pension", "profit sharing", "additional benefits"]
+      "question": "What does Zeppelin Power Systems do?",
+      "answer": "We are part of the Zeppelin Group and specialize in drive and energy systems, with a focus of innovation, sustainability, and digital solutions.",
+      "keywords": ["company", "business", "about", "zeppelin group", "drive systems", "energy systems", "sustainability", "innovation", "what do you do", "industry", "about company", "what is zeppelin", "tell me about", "what exactly do you do", "exactly do", "what exactly", "do you do", "what does", "what does zeppelin do"]
     },
     {
       "id": 14,
-      "question": "What is Z FIT?",
-      "answer": "Z FIT is our health initiative - with themed weeks, sporting team events and the possibility to lease a company bike.",
-      "keywords": ["z fit", "health", "fitness", "wellness", "company bike", "team events", "exercise"]
+      "question": "What is the corporate culture like?",
+      "answer": "As a foundation-owned company, we act in a future-oriented, social, and sustainable way. Team spirit, diversity, inclusion, and safety are at the heart of our culture.",
+      "keywords": ["corporate culture", "work culture", "company values", "team spirit", "diversity", "inclusion", "safety", "foundation company", "company culture"]
     },
     {
       "id": 15,
-      "question": "What does Z COLOURFUL mean?",
-      "answer": "Z COLOURFUL stands for our diversity initiative - with impulse series, networks and targeted inclusion measures.",
-      "keywords": ["z colourful", "diversity", "inclusion", "networks", "impulse series", "inclusive"]
+      "question": "What development opportunities do I have?",
+      "answer": "We support your growth with tailored development plans, extensive training opportunities, and practical learning paths.",
+      "keywords": ["development", "career development", "growth", "learning", "training", "opportunities", "career progression"]
     },
     {
       "id": 16,
-      "question": "How do you support work-life balance?",
-      "answer": "We offer mobile working, flexible models and advice on all aspects of family and career.",
-      "keywords": ["work-life balance", "mobile working", "flexible", "family", "career", "balance"]
+      "question": "Are internal training courses available?",
+      "answer": "Yes, we offer internal trainings, impulse series, and specialized learning formats for different roles.",
+      "keywords": ["internal training", "courses", "impulse sessions", "learning", "workshops", "development programs", "employee training"]
     },
     {
       "id": 17,
-      "question": "What do you do for sustainability?",
-      "answer": "Our sustainability strategy includes CO2 reduction, waste avoidance and life cycle management - for a sustainable working environment.",
-      "keywords": ["sustainability", "environment", "co2", "reduction", "waste", "life cycle", "green", "eco"]
+      "question": "How many vacation days do employees receive?",
+      "answer": "Employees are entitled to 30 vacation days per year, plus special leave on certain occasions.",
+      "keywords": ["vacation", "annual leave", "holiday", "paid leave", "days off", "time off", "special leave", "holiday entitlement"]
     },
     {
       "id": 18,
-      "question": "How safe is my workplace?",
-      "answer": "As a foundation company, we offer you a permanent employment contract and long-term prospects.",
-      "keywords": ["job security", "workplace safety", "permanent", "contract", "foundation company", "long-term"]
+      "question": "Is a job ticket provided?",
+      "answer": "We currently do not offer a job ticket, but we provide many other attractive benefits.",
+      "keywords": ["job ticket", "transport", "commuting", "public transport", "benefits", "travel", "train ticket"]
     },
     {
       "id": 19,
-      "question": "What happens to my data?",
-      "answer": "Your data will be processed in accordance with GDPR, treated confidentially and only used for the application process.",
-      "keywords": ["data protection", "gdpr", "privacy", "confidential", "application process"]
+      "question": "What additional benefits do you offer?",
+      "answer": "Our benefits include capital-forming contributions, a company pension plan, profit sharing, health programs, and more.",
+      "keywords": ["benefits", "perks", "capital-forming", "pension", "profit sharing", "company benefits", "employee benefits", "perquisites"]
     },
     {
       "id": 20,
-      "question": "Can I send an unsolicited application?",
-      "answer": "Yes, unsolicited applications are welcome! Just tell us which area you see yourself in.",
-      "keywords": ["unsolicited", "application", "spontaneous", "open application", "area"]
+      "question": "What is Z FIT?",
+      "answer": "Z FIT is our health and fitness initiative, offering sports team events, themed health weeks, and the option to lease a company bike.",
+      "keywords": ["z fit", "fitness", "health", "wellness", "exercise", "company bike", "team events", "sports"]
     },
     {
       "id": 21,
-      "question": "How does the application process work?",
-      "answer": "Once we have received your application, we will check your documents and get back to you as soon as possible. This may be followed by an initial interview and further steps - depending on the position.",
-      "keywords": ["process", "application", "documents", "interview", "steps", "recruiting"]
+      "question": "What does Z COLOURFUL mean?",
+      "answer": "Z COLOURFUL is our diversity initiative with impulse sessions, employee networks, and targeted inclusion programs.",
+      "keywords": ["z colourful", "diversity", "inclusion", "networks", "impulse sessions", "inclusive culture", "equal opportunity"]
     },
     {
       "id": 22,
-      "question": "How long will it take to hear back from me?",
-      "answer": "As a rule, you will receive initial feedback from us within 7 days.",
-      "keywords": ["feedback", "response time", "7 days", "hearing back", "timeline"]
+      "question": "How do you support work-life balance?",
+      "answer": "We promote work-life balance through flexible working, mobile work, and dedicated family-career support programs.",
+      "keywords": ["work-life balance", "flexible work", "family support", "career balance", "mobile working", "work flexibility"]
     },
     {
       "id": 23,
-      "question": "Can I change my application at a later date?",
-      "answer": "If you would like to add anything, please contact our recruiting team - we will be happy to help you.",
-      "keywords": ["change", "update", "modify", "application", "recruiting team", "add"]
+      "question": "What sustainability initiatives are in place?",
+      "answer": "Our sustainability strategy focuses on CO2 reduction, waste prevention, and life cycle management.",
+      "keywords": ["sustainability", "environment", "green", "eco", "co2 reduction", "waste", "life cycle", "climate", "green strategy"]
     },
     {
       "id": 24,
-      "question": "What documents are required?",
-      "answer": "We need your CV. A cover letter and references are optional.",
-      "keywords": ["documents", "required", "cv", "cover letter", "references", "optional"]
+      "question": "How secure is my workplace?",
+      "answer": "As a foundation-owned company, we offer permanent contracts, long-term stability, and future security.",
+      "keywords": ["job security", "permanent contract", "employment stability", "workplace safety", "long-term career", "secure job", "safe", "how safe", "job safe", "safe job", "secure"]
+    },
+    {
+      "id": 25,
+      "question": "What happens to my data during the application process?",
+      "answer": "Your personal data is processed securely and confidentially according to GDPR and is used only for the application process.",
+      "keywords": ["data protection", "gdpr", "privacy", "confidentiality", "application data", "personal data", "data security"]
+    },
+    {
+      "id": 26,
+      "question": "Do you offer onboarding for new employees?",
+      "answer": "Yes, we provide a structured onboarding process, including introductions to teams, mentors, and training for a smooth start.",
+      "keywords": ["onboarding", "new employee", "orientation", "training start", "mentor", "employee induction"]
+    },
+    {
+      "id": 27,
+      "question": "Do you hire international applicants?",
+      "answer": "Yes, we welcome international applicants. Depending on the role, German language skills may be required, but English is also widely used.",
+      "keywords": ["international applicants", "foreign applicants", "non-EU applicants", "work visa", "apply from abroad", "language requirements"]
+    },
+    {
+      "id": 28,
+      "question": "Do you offer probation periods?",
+      "answer": "Yes, as is standard in Germany, new employees typically have a probation period, details of which are provided in the employment contract.",
+      "keywords": ["probation", "trial period", "probationary", "probation contract", "initial period"]
+    },
+    {
+      "id": 29,
+      "question": "Do you provide salary information?",
+      "answer": "Salary depends on the position and experience. Details are usually discussed during the recruitment process.",
+      "keywords": ["salary", "pay", "wage", "compensation", "income", "remuneration", "how much do I earn", "salary range", "payment", "money", "earnings", "how much pay"]
     }
   ]
 }

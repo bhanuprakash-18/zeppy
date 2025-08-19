@@ -209,6 +209,23 @@ class ZeppelinChatbot {
     processMessage(message) {
         const lowerMessage = message.toLowerCase();
         
+        // Check for too vague/unclear messages
+        if (this.isMessageTooVague(message)) {
+            this.addBotMessage(`
+                <p>I'd be happy to help! Could you please be more specific about what you'd like to know?</p>
+                <p>You can ask me about:</p>
+                <ul>
+                    <li>Application process and requirements</li>
+                    <li>Job opportunities and positions</li>
+                    <li>Company information and culture</li>
+                    <li>Benefits and working conditions</li>
+                    <li>Training and development opportunities</li>
+                </ul>
+            `);
+            this.addFollowUpOptions();
+            return;
+        }
+        
         // Handle conversation flow for simple responses
         if (this.conversationState.expectingFollowUp) {
             return this.handleFollowUpResponse(lowerMessage);
@@ -282,14 +299,36 @@ class ZeppelinChatbot {
         this.addBotMessage(`
             <p>Hmm, I'm not quite sure about that one! 🤔 But no worries - I'm Zeppy, and I'm here to help you find exactly what you need! ✨</p>
             <div class="quick-options">
-                <button class="option-btn" onclick="window.chatbot.handleQuickOption('application')">Application Questions</button>
-                <button class="option-btn" onclick="window.chatbot.handleQuickOption('jobs')">Job Information</button>
-                <button class="option-btn" onclick="window.chatbot.handleQuickOption('company')">Company Info</button>
-                <button class="option-btn" onclick="window.chatbot.handleQuickOption('benefits')">Benefits & Culture</button>
-                <button class="option-btn" onclick="window.chatbot.askSpecific('contact recruiting team')">Contact Recruiting Team</button>
+                <button class="option-btn" onclick="window.chatbot.handleQuickOption('application')">Application & documents</button>
+                <button class="option-btn" onclick="window.chatbot.handleQuickOption('jobs')">Job advertisements & requirements</button>
+                <button class="option-btn" onclick="window.chatbot.handleQuickOption('company')">Company & working time models</button>
+                <button class="option-btn" onclick="window.chatbot.handleQuickOption('benefits')">Benefits & corporate culture</button>
+                <button class="option-btn" onclick="window.chatbot.askSpecific('contact recruiting team')">Contact recruiting team</button>
             </div>
             <p>Or feel free to rephrase your question - I love helping people find their perfect career path! 😊🚁</p>
         `);
+    }
+
+    isMessageTooVague(message) {
+        const trimmedMessage = message.trim().toLowerCase();
+        
+        // Check for single words that are too vague
+        const vagueSingleWords = ['what', 'how', 'when', 'where', 'why', 'who', 'tell', 'info', 'help', 'hi', 'hello', 'hey'];
+        if (vagueSingleWords.includes(trimmedMessage)) {
+            return true;
+        }
+        
+        // Check for very short messages (less than 3 characters or less than 2 words)
+        if (trimmedMessage.length < 3 || trimmedMessage.split(' ').length < 2) {
+            return true;
+        }
+        
+        // Check for other vague patterns
+        const vaguePatterns = [
+            'what?', 'how?', 'tell me', 'i want to know', 'information'
+        ];
+        
+        return vaguePatterns.some(pattern => trimmedMessage === pattern);
     }
 
     isApplicationQuestion(message) {
@@ -415,18 +454,18 @@ class ZeppelinChatbot {
                 this.addBotMessage(`
                     <p>Perfect! What would you like help with?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application Questions</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">Browse Current Jobs</button>
-                        <button class="option-btn" onclick="chatbot.askSpecific('Can I send an unsolicited application?')">Unsolicited Application</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application & documents</button>
+                        <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">Browse current jobs</button>
+                        <button class="option-btn" onclick="chatbot.askSpecific('Can I send an unsolicited application?')">Unsolicited application</button>
                     </div>
                 `);
             } else if (isNegative) {
                 this.addBotMessage(`
                     <p>Alright! I'm here if you need any information. What can I help you with?</p>
                     <div class="quick-options">
-                        <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job Information</button>
-                        <button class="option-btn" onclick="chatbot.handleQuickOption('company')">About Company</button>
-                        <button class="option-btn" onclick="chatbot.resetToMainMenu()">Main Menu</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job advertisements & requirements</button>
+                        <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company & working time models</button>
+                        <button class="option-btn" onclick="chatbot.resetToMainMenu()">Main menu</button>
                     </div>
                 `);
             }
@@ -438,7 +477,7 @@ class ZeppelinChatbot {
             this.addBotMessage(`
                 <p>Great! Let me help you further. What would you like to know more about?</p>
                 <div class="quick-options">
-                    <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job Opportunities</button>
+                    <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job advertisements & requirements</button>
                     <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application Process</button>
                     <button class="option-btn" onclick="chatbot.handleQuickOption('benefits')">Benefits & Culture</button>
                 </div>
@@ -1016,18 +1055,24 @@ class ZeppelinChatbot {
         this.faqs.forEach(faq => {
             let score = 0;
             
-            // Check keywords
+            // Check keywords with higher weight for multi-word exact matches
             faq.keywords.forEach(keyword => {
-                if (message.includes(keyword.toLowerCase())) {
-                    score += 2;
+                const lowerKeyword = keyword.toLowerCase();
+                if (message.includes(lowerKeyword)) {
+                    // Give higher score for longer, more specific keywords
+                    if (lowerKeyword.split(' ').length > 1) {
+                        score += 5; // Multi-word keywords get higher priority
+                    } else {
+                        score += 2; // Single word keywords
+                    }
                 }
             });
             
-            // Check question content
+            // Check question content (reduced weight)
             const questionWords = faq.question.toLowerCase().split(' ');
             questionWords.forEach(word => {
                 if (word.length > 3 && message.includes(word)) {
-                    score += 1;
+                    score += 0.5; // Reduced weight for question word matches
                 }
             });
             
@@ -1288,12 +1333,12 @@ class ZeppelinChatbot {
 
     getOptionDisplayText(option) {
         const optionTexts = {
-            'application': 'Application & Documents',
-            'jobs': 'Job Advertisements & Requirements',
-            'company': 'Company & Working Time Models',
-            'career': 'Career & Development',
-            'benefits': 'Benefits & Corporate Culture',
-            'other': 'Ask Something Else'
+            'application': 'Application & documents',
+            'jobs': 'Job advertisements & requirements',
+            'company': 'Company & working time models',
+            'career': 'Career & development',
+            'benefits': 'Benefits & corporate culture',
+            'other': 'Ask something else'
         };
         return optionTexts[option] || option;
     }
@@ -1362,9 +1407,7 @@ class ZeppelinChatbot {
                 
             case 'other':
                 this.addBotMessage(`
-                    <p>Feel free to ask me your question - I'll try to help you or pass you on.</p>
-                    <p>You can type any question about jobs, applications, company culture, benefits, or anything else you'd like to know!</p>
-                    <p><em>If I can't answer your question directly, you can always contact our recruiting team.</em></p>
+                    <p>Feel free to ask me your question - I'll try to help or pass you on. If I can't answer, you can always contact our recruiting team.</p>
                 `);
                 break;
         }
@@ -1465,12 +1508,11 @@ class ZeppelinChatbot {
 
     addFollowUpOptions() {
         this.addBotMessage(`
-            <p>I hope I was able to help you! Would you like to:</p>
+            <p>I hope I was able to help you! Would you like to apply now or find out more?</p>
             <div class="quick-options">
-                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Ask about applications</button>
-                <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">See available jobs</button>
-                <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Get in touch with recruiting</button>
-                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Back to main menu</button>
+                <button class="option-btn" onclick="chatbot.askSpecific('show me available jobs')">Apply now</button>
+                <button class="option-btn" onclick="chatbot.resetToMainMenu()">Ask more questions</button>
+                <button class="option-btn" onclick="chatbot.askSpecific('contact recruiting team')">Get in touch</button>
             </div>
         `);
     }
@@ -1479,12 +1521,12 @@ class ZeppelinChatbot {
         this.addBotMessage(`
             <p>Hello and welcome back! What are you interested in right now?</p>
             <div class="quick-options">
-                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application & Documents</button>
-                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job Advertisements & Requirements</button>
-                <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company & Working Time Models</button>
-                <button class="option-btn" onclick="chatbot.handleQuickOption('career')">Career & Development</button>
-                <button class="option-btn" onclick="chatbot.handleQuickOption('benefits')">Benefits & Corporate Culture</button>
-                <button class="option-btn" onclick="chatbot.handleQuickOption('other')">Ask Something Else</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('application')">Application & documents</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('jobs')">Job advertisements & requirements</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('company')">Company & working time models</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('career')">Career & development</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('benefits')">Benefits & corporate culture</button>
+                <button class="option-btn" onclick="chatbot.handleQuickOption('other')">Ask something else</button>
             </div>
         `);
     }
