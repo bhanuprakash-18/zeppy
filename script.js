@@ -1171,8 +1171,6 @@ class ZeppelinChatbot {
     }
 
     formatSearchResultCard(job) {
-        // Extract experience level from requirements
-        const experience = this.extractExperienceLevel(job);
         const company = "Zeppelin Power Systems"; // Since all jobs are from this company
         
         return `
@@ -1182,7 +1180,6 @@ class ZeppelinChatbot {
                     <div class="job-company">🏢 ${company}</div>
                     <div class="job-location">📍 ${job.location}</div>
                     <div class="job-type">⏰ ${job.type}</div>
-                    <div class="job-experience">📊 ${experience}</div>
                 </div>
                 <div class="job-actions">
                     <button class="view-details-btn large" onclick="window.chatbot.showJobDetails(${job.id})">View Details</button>
