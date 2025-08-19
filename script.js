@@ -277,7 +277,21 @@ class ZeppelinChatbot {
             return;
         }
 
-        // PRIORITY 4: Handle other FAQ matches
+        // PRIORITY 4: Handle specific company info requests (locations, culture, etc.) before general FAQ
+        if (lowerMessage.includes('location') || lowerMessage.includes('office') || 
+            lowerMessage.includes('culture') || lowerMessage.includes('environment') ||
+            lowerMessage.includes('mission') || lowerMessage.includes('vision') || lowerMessage.includes('values')) {
+            const companyInfo = this.findCompanyInfo(lowerMessage);
+            if (companyInfo) {
+                this.setConversationState('company', 'company_info');
+                this.addBotMessage(companyInfo);
+                this.addBotMessage(`<p>Would you like to know more about our company culture, or are you interested in exploring job opportunities?</p>`);
+                this.setExpectingFollowUp(true);
+                return;
+            }
+        }
+
+        // PRIORITY 5: Handle other FAQ matches
         const faqMatches = this.findFAQMatches(lowerMessage);
         if (faqMatches.length > 0) {
             this.setConversationState('faq', faqMatches[0].question);
@@ -285,7 +299,7 @@ class ZeppelinChatbot {
             return;
         }
 
-        // PRIORITY 5: Handle company info matches
+        // PRIORITY 6: Handle general company info matches
         const companyInfo = this.findCompanyInfo(lowerMessage);
         if (companyInfo) {
             this.setConversationState('company', 'company_info');
@@ -1096,7 +1110,11 @@ class ZeppelinChatbot {
             }
         });
         
-        if (!hasCompanyKeyword) return null;
+        // Also trigger for specific queries even without general company keywords
+        const specificQueries = ['location', 'office', 'culture', 'environment', 'mission', 'vision', 'values'];
+        const hasSpecificQuery = specificQueries.some(query => message.includes(query));
+        
+        if (!hasCompanyKeyword && !hasSpecificQuery) return null;
         
         // Check what specific info they want
         if (message.includes('mission')) {
@@ -1122,7 +1140,8 @@ class ZeppelinChatbot {
             `;
         }
         
-        if (message.includes('location') || message.includes('office')) {
+        if (message.includes('location') || message.includes('office') || message.includes('where') || 
+            message.includes('addresses') || message.includes('branches') || message.includes('sites')) {
             const locationsList = this.handbook.locations
                 .map(loc => `<li><strong>${loc.city}</strong> - ${loc.type}: ${loc.focus}</li>`)
                 .join('');
