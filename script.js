@@ -328,7 +328,7 @@ class ZeppelinChatbot {
                 <button class="option-btn" onclick="window.chatbot.handleQuickOption('benefits')">Benefits & corporate culture</button>
                 <button class="option-btn" onclick="window.chatbot.askSpecific('contact recruiting team')">Contact recruiting team</button>
             </div>
-            <p>Or feel free to rephrase your question - I love helping people find their perfect career path! 😊🚁</p>
+            <p>Or feel free to rephrase your question - I love helping people find their perfect career path! 😊</p>
         `);
     }
 
@@ -404,7 +404,7 @@ class ZeppelinChatbot {
         if (['no', 'nope'].includes(message.trim())) {
             this.addBotMessage(`
                 <p>No worries at all! 😊 If you change your mind or have any questions about Zeppelin Power Systems, I'm here for you!</p>
-                <p>Feel free to ask me anything about jobs, applications, company culture, or benefits. I love helping people discover their next adventure! 🚁✨</p>
+                <p>Feel free to ask me anything about jobs, applications, company culture, or benefits. I love helping people discover their next adventure! ✨</p>
             `);
             return;
         }
