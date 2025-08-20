@@ -297,7 +297,7 @@ body {
 .chat-header {
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: #ffffff;
-    padding: 20px;
+    padding: 8px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -312,8 +312,8 @@ body {
 .bot-avatar {
     background: transparent; /* Remove yellow background */
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -324,8 +324,8 @@ body {
 }
 
 .zeppy-image {
-    width: 41px; /* Make image fill the avatar container (45px - 2px border each side) */
-    height: 41px;
+    width: 38px; /* Make image fill the avatar container (42px - 2px border each side) */
+    height: 38px;
     object-fit: cover;
     border-radius: 50%;
     display: inline-block;
