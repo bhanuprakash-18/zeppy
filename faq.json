@@ -4,19 +4,19 @@
       "id": 1,
       "question": "What should I consider when applying?",
       "answer": "To apply to Zeppelin Power Systems, you only need to submit your CV via our online application portal. Cover letters and references are optional but welcome.",
-      "keywords": ["apply", "application", "application portal", "cv", "curriculum vitae", "resume", "cover letter", "references", "documents", "requirements", "submit application", "apply online", "how to apply", "applying", "application process", "consider when applying", "should i consider"]
+      "keywords": ["apply", "application", "application portal", "cv", "curriculum vitae", "resume", "cover letter", "references", "documents", "requirements", "submit application", "apply online", "how to apply", "applying", "application process", "consider when applying", "what do i need", "what do i need to submit", "need to submit", "what to submit"]
     },
     {
       "id": 2,
       "question": "What documents are required for an application?",
       "answer": "The only mandatory document is your CV. A cover letter and references are optional but can strengthen your application.",
-      "keywords": ["documents required", "cv", "resume", "cover letter", "references", "mandatory documents", "application documents"]
+      "keywords": ["documents required", "cv", "resume", "cover letter", "references", "mandatory documents", "application documents", "what do i need", "need to submit", "what to submit", "required documents"]
     },
     {
       "id": 3,
       "question": "How does the application process work?",
       "answer": "After receiving your application, our recruiting team reviews your documents and provides feedback within about 7 days. Depending on the position, further steps may include interviews and assessments.",
-      "keywords": ["application process", "hiring steps", "recruitment", "selection process", "interview", "application steps", "recruitment process"]
+      "keywords": ["application process", "hiring steps", "recruitment", "selection process", "interview", "application steps", "recruitment process", "how does the process work", "process work", "how does it work", "how does the process", "application process work"]
     },
     {
       "id": 4,
@@ -52,7 +52,7 @@
       "id": 9,
       "question": "Are positions also suitable for career starters?",
       "answer": "Yes, many positions are suitable for graduates and career starters. Check the job postings or submit an unsolicited application.",
-      "keywords": ["career starters", "entry level", "beginners", "graduates", "junior position", "student jobs", "freshers"]
+      "keywords": ["career starters", "entry level", "beginners", "graduates", "junior position", "student jobs", "freshers", "young professionals", "suitable for", "position suitable", "suitable for young", "young people", "new graduates", "recent graduates", "is the position suitable"]
     },
     {
       "id": 10,
