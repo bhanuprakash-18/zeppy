@@ -48,7 +48,7 @@ body {
 }
 
 .zeppelin-icon-img {
-    width: 70px;
+    width: 120px;
     height: auto;
     max-width: 100%;
 }
@@ -980,7 +980,7 @@ body {
     .zeppelin-icon-img {
         margin-left: 0 !important;
         margin-right: 10px !important;
-        max-width: 55px;
+        max-width: 90px;
         height: auto;
     }
     
@@ -1113,7 +1113,7 @@ body {
     .zeppelin-icon-img {
         margin-left: 0 !important;
         margin-right: 0 !important;
-        max-width: 45px;
+        max-width: 75px;
         height: auto;
     }
     
